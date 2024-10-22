@@ -16,7 +16,7 @@ POO em Java e a classe Scanner
 ### Bnaco de Dados:
 ![image](https://github.com/user-attachments/assets/cdca6b9d-ba09-416b-882c-0d480bb4e129)
 
-### Coamandos para criação/visualização do BDD
+### Comandos para criação/visualização do BDD:
 ```
 mysql -u root
 ```
