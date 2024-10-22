@@ -13,7 +13,7 @@ exceção, além da implementação das classes utilizando padrões
 POO em Java e a classe Scanner
 </p>
 
-### Bnaco de Dados:
+### Bnaco de Dados (Única tabela):
 ![image](https://github.com/user-attachments/assets/cdca6b9d-ba09-416b-882c-0d480bb4e129)
 
 ### Comandos para criação/visualização do BDD:
