@@ -1,5 +1,18 @@
 # Jogadores_e_Sports
 
+### Problema:
+<p>
+  Desenvolva operações CRUD para instanciar objetos jogadores 
+de e-sportes em um SGBD relacional: código e nome como 
+atributos desses objetos. Há jogadores veteranos com 5 anos 
+ou mais de tempo de treino, assim como há jogadores trainees
+com menos 5 anos de treino. Os jogadores veteranos recebem
+10% a mais de salário do que os trainees (salário fixo). 
+Para esse desenvolvimento explore Interface e tratamento de 
+exceção, além da implementação das classes utilizando padrões
+POO em Java e a classe Scanner
+</p>
+
 ### Bnaco de Dados:
 ![image](https://github.com/user-attachments/assets/cdca6b9d-ba09-416b-882c-0d480bb4e129)
 
