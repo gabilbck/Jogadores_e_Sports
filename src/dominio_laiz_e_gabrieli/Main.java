@@ -10,7 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogador", "root", "password");
-            JogadorDAO jogadorDAO = new JogadorDAOImpl(conn);
+            JogadorFuncs jogadorFuncs = new JogadorFuncs(conn);
 
             boolean running = true;
             while (running) {
@@ -41,14 +41,14 @@ public class Main {
                         } else {
                             jogador = new JogadorTrainee(codigo, nome, salario, anosTreino);
                         }
-                        jogadorDAO.adicionarJogador(jogador);
+                        jogadorFuncs.addJogador(jogador);
                         System.out.println("Jogador adicionado com sucesso.");
                         break;
 
                     case 2:
                         System.out.print("Digite o código do jogador: ");
                         int codigoBusca = scanner.nextInt();
-                        Jogador jogadorBuscado = jogadorDAO.buscarJogador(codigoBusca);
+                        Jogador jogadorBuscado = jogadorFuncs.searchJogador(codigoBusca);
                         if (jogadorBuscado != null) {
                             System.out.println("Jogador encontrado: " + jogadorBuscado.getNome());
                         } else {
@@ -63,12 +63,12 @@ public class Main {
                     case 4:
                         System.out.print("Digite o código do jogador para deletar: ");
                         int codigoDeletar = scanner.nextInt();
-                        jogadorDAO.deletarJogador(codigoDeletar);
+                        jogadorFuncs.delJogador(codigoDeletar);
                         System.out.println("Jogador deletado com sucesso.");
                         break;
 
                     case 5:
-                        List<Jogador> jogadores = jogadorDAO.listarJogadores();
+                        List<Jogador> jogadores = jogadorFuncs.listJogadores();
                         for (Jogador j : jogadores) {
                             System.out.println(j.getNome() + " - Salário: " + j.calcularSalario());
                         }
