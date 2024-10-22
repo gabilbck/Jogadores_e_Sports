@@ -4,15 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JogadorDAOimpl implements JogadorDAO {
+public class JogadorFuncs implements JogadorInterface {
     private Connection conn;
 
-    public JogadorDAOimpl(Connection conn) {
+    public JogadorFuncs(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public void adicionarJogador(Jogador jogador) throws SQLException {
+    public void addJogador(Jogador jogador) throws SQLException {
         String sql = "INSERT INTO jogadores (idJogador, nomeJogador, salarioJogador, experienciaJogador) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, jogador.getidJogador());
@@ -24,7 +24,7 @@ public class JogadorDAOimpl implements JogadorDAO {
     }
 
     @Override
-    public Jogador buscarJogador(int idJogador) throws SQLException {
+    public Jogador searchJogador(int idJogador) throws SQLException {
         String sql = "SELECT * FROM jogadores WHERE idJogador = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idJogador);
@@ -44,7 +44,7 @@ public class JogadorDAOimpl implements JogadorDAO {
     }
 
     @Override
-    public void atualizarJogador(Jogador jogador) throws SQLException {
+    public void uptJogador(Jogador jogador) throws SQLException {
         String sql = "UPDATE jogadores SET nomeJogador = ?, salarioJogador = ?, experienciaJogador = ? WHERE idJogador = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, jogador.getnomeJogador());
@@ -56,7 +56,7 @@ public class JogadorDAOimpl implements JogadorDAO {
     }
 
     @Override
-    public void deletarJogador(int idJogador) throws SQLException {
+    public void delJogador(int idJogador) throws SQLException {
         String sql = "DELETE FROM jogadores WHERE idJogador = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idJogador);
@@ -65,7 +65,7 @@ public class JogadorDAOimpl implements JogadorDAO {
     }
 
     @Override
-    public List<Jogador> listarJogadores() throws SQLException {
+    public List<Jogador> listJogadores() throws SQLException {
         List<Jogador> jogadores = new ArrayList<>();
         String sql = "SELECT * FROM jogadores";
         try (Statement stmt = conn.createStatement();
