@@ -20,6 +20,6 @@ use jogadores_e_sports;
 create table jogador(id_jogador int not null, nome_jogador varchar(100) not null, salario_jogador double not null,  experiencia_jogador int not null, primary key(id_jogador));
 ```
 ```
-desc jogador
+desc jogador;
 ```
 
