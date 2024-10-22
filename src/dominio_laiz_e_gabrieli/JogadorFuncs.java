@@ -3,6 +3,7 @@ package dominio_laiz_e_gabrieli;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.SQLException;
 
 public class JogadorFuncs implements JogadorInterface {
     private Connection conn;
@@ -15,10 +16,10 @@ public class JogadorFuncs implements JogadorInterface {
     public void addJogador(Jogador jogador) throws SQLException {
         String sql = "INSERT INTO jogadores (idJogador, nomeJogador, salarioJogador, experienciaJogador) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, jogador.getidJogador());
-            stmt.setString(2, jogador.getnomeJogador());
-            stmt.setDouble(3, jogador.calcularsalarioJogador());
-            stmt.setInt(4, jogador.getexperienciaJogador());
+            stmt.setInt(1, jogador.getIdJogador());
+            stmt.setString(2, jogador.getNomeJogador());
+            stmt.setDouble(3, jogador.calcularSalario());
+            stmt.setInt(4, jogador.getExperienciaJogador());
             stmt.executeUpdate();
         }
     }
@@ -47,10 +48,10 @@ public class JogadorFuncs implements JogadorInterface {
     public void uptJogador(Jogador jogador) throws SQLException {
         String sql = "UPDATE jogadores SET nomeJogador = ?, salarioJogador = ?, experienciaJogador = ? WHERE idJogador = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, jogador.getnomeJogador());
-            stmt.setDouble(2, jogador.calcularsalarioJogador());
-            stmt.setInt(3, jogador.getexperienciaJogador());
-            stmt.setInt(4, jogador.getidJogador());
+            stmt.setString(1, jogador.getNomeJogador());
+            stmt.setDouble(2, jogador.calcularSalario());
+            stmt.setInt(3, jogador.getExperienciaJogador());
+            stmt.setInt(4, jogador.getIdJogador());
             stmt.executeUpdate();
         }
     }
@@ -84,6 +85,6 @@ public class JogadorFuncs implements JogadorInterface {
                 jogadores.add(jogador);
             }
         }
-        return jogadores;
+        return jogador;
     }
 }

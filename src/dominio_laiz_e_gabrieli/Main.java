@@ -50,7 +50,7 @@ public class Main {
                         int codigoBusca = scanner.nextInt();
                         Jogador jogadorBuscado = jogadorFuncs.searchJogador(codigoBusca);
                         if (jogadorBuscado != null) {
-                            System.out.println("Jogador encontrado: " + jogadorBuscado.getNome());
+                            System.out.println("Jogador encontrado: " + jogadorBuscado.getNomeJogador());
                         } else {
                             System.out.println("Jogador não encontrado.");
                         }
@@ -70,7 +70,7 @@ public class Main {
                     case 5:
                         List<Jogador> jogadores = jogadorFuncs.listJogadores();
                         for (Jogador j : jogadores) {
-                            System.out.println(j.getNome() + " - Salário: " + j.calcularSalario());
+                            System.out.println(j.getNomeJogador() + " - Salário: " + j.calcularSalario());
                         }
                         break;
 
