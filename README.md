@@ -1,7 +1,7 @@
 # Jogadores_e_Sports
 
 ### Bnaco de Dados:
-![image](https://github.com/user-attachments/assets/ce982198-46a4-4b64-bd4f-43ecaf27b0d2)
+![image](https://github.com/user-attachments/assets/cdca6b9d-ba09-416b-882c-0d480bb4e129)
 
 ### Coamandos para criação/visualização do BDD
 ```
