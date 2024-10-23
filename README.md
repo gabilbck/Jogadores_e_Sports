@@ -48,7 +48,7 @@ CREATE TABLE jogador (
       experiencia INT NOT NULL, 
       categoria INT, 
       PRIMARY KEY(id), 
-      FOREIGN KEY (categoria) REFERENCES categoria_jogo(id));
+      FOREIGN KEY (categoria) REFERENCES categoria(id));
 ```
 ```
 desc jogador;
