@@ -1,12 +1,12 @@
 package dominio_laiz_e_gabrieli;
 
-public abstract class Jogador {
+public abstract class Categoria {
 	    private int idCategoria;
 	    private String categoria;
 	    private String descricao;
 
     	// Setters
-  	  public Jogador(int idCategoria, String categoria, String descricao) {
+  	  public Categoria(int idCategoria, String categoria, String descricao) {
   		  this.idCategoria = idCategoria;
   		  this.categoria = categoria;
   		  this.descricao = descricao;
@@ -22,11 +22,6 @@ public abstract class Jogador {
   	  public String getDesc() {
   		  return descricao;
   	  }
-  	
-  	  public int getCategoria() {
-  		  return categoria;
-  	  }
-	
+  	  
 	  // Metodos
-	  //public abstract double calcular();
 }

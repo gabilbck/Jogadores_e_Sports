@@ -3,7 +3,6 @@ package dominio_laiz_e_gabrieli;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.SQLException;
 
 public class JogadorFuncs implements JogadorInterface {
     private Connection conn;
