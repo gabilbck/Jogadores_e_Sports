@@ -14,19 +14,20 @@ public class JogadorFuncs implements JogadorInterface {
 
     @Override
     public void addJogador(Jogador jogador) throws SQLException {
-        String sql = "INSERT INTO jogador (idJogador, nome, salario, experiencia, categoria) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO jogador (id, nome, salario, experiencia, categoria) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, jogador.getIdJogador());
             stmt.setString(2, jogador.getNome());
             stmt.setDouble(3, jogador.calcularSalario());
             stmt.setInt(4, jogador.getExperiencia());
+            stmt.setInt(5, jogador.getCategoria());
             stmt.executeUpdate();
         }
     }
 
     @Override
     public Jogador searchJogador(int idJogador) throws SQLException {
-        String sql = "SELECT * FROM jogadores WHERE id = ?";
+        String sql = "SELECT * FROM jogador WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idJogador);
             ResultSet rs = stmt.executeQuery();
@@ -34,6 +35,7 @@ public class JogadorFuncs implements JogadorInterface {
                 String nome = rs.getString("nome");
                 double salario = rs.getDouble("salario");
                 int experiencia = rs.getInt("experiencia");
+                int categoria = rs.getInt("categoria");
                 if (experiencia >= 5) {
                     return new JogadorVeterano(idJogador, nome, salario, experiencia, categoria);
                 } else {
@@ -46,19 +48,20 @@ public class JogadorFuncs implements JogadorInterface {
 
     @Override
     public void uptJogador(Jogador jogador) throws SQLException {
-        String sql = "UPDATE jogador SET nome = ?, salario = ?, experiencia = ? WHERE id = ?";
+        String sql = "UPDATE jogador SET nome = ?, salario = ?, experiencia = ?, categoria = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, jogador.getNome());
             stmt.setDouble(2, jogador.calcularSalario());
             stmt.setInt(3, jogador.getExperiencia());
-            stmt.setInt(4, jogador.getIdJogador());
+            stmt.setInt(4, jogador.getCategoria());
+            stmt.setInt(5, jogador.getIdJogador());
             stmt.executeUpdate();
         }
     }
 
     @Override
     public void delJogador(int idJogador) throws SQLException {
-        String sql = "DELETE FROM jogadores WHERE id = ?";
+        String sql = "DELETE FROM jogador WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idJogador);
             stmt.executeUpdate();
@@ -76,6 +79,7 @@ public class JogadorFuncs implements JogadorInterface {
                 String nome = rs.getString("nome");
                 double salario = rs.getDouble("salario");
                 int experiencia = rs.getInt("experiencia");
+                int categoria = rs.getInt("categoria");
                 Jogador jogador;
                 if (experiencia >= 5) {
                     jogador = new JogadorVeterano(idJogador, nome, salario, experiencia, categoria);
