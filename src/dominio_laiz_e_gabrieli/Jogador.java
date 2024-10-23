@@ -1,15 +1,15 @@
 package dominio_laiz_e_gabrieli;
 
 public abstract class Jogador {
-	private int idJogador;
+	private int id;
 	private String nome;
 	private double salario;
 	private int experiencia;
 	private int categoria;
 
     	// Setters
-	public Jogador(int idJogador, String nome, double salario, int experiencia, int categoria) {
-		this.idJogador = idJogador;
+	public Jogador(int id, String nome, double salario, int experiencia, int categoria) {
+		this.id = id;
 		this.nome = nome;
 		this.salario = salario;
 		this.experiencia = experiencia;
@@ -17,8 +17,8 @@ public abstract class Jogador {
 	}
 
     	// Getters
-	public int getIdJogador() {
-		return idJogador;
+	public int getId() {
+		return id;
 	}
 	public String getNome() {
 		return nome;

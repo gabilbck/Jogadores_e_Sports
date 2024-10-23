@@ -1,8 +1,8 @@
 package dominio_laiz_e_gabrieli;
 
 public class JogadorVeterano extends Jogador {
-    public JogadorVeterano(int idJogador, String nome, double salario, int experiencia, int categoria) {
-        super(idJogador, nomer, salario, experiencia, categoria);
+    public JogadorVeterano(int id, String nome, double salario, int experiencia, int categoria) {
+        super(id, nome, salario, experiencia, categoria);
     }
 
     @Override

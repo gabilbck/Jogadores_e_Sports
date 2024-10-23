@@ -12,11 +12,11 @@ public class JogadorFuncs implements JogadorInterface {
         this.conn = conn;
     }
 
-    @Override
+    @Override //Cadastrar
     public void addJogador(Jogador jogador) throws SQLException {
         String sql = "INSERT INTO jogador (id, nome, salario, experiencia, categoria) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, jogador.getIdJogador());
+            stmt.setInt(1, jogador.getId());
             stmt.setString(2, jogador.getNome());
             stmt.setDouble(3, jogador.calcularSalario());
             stmt.setInt(4, jogador.getExperiencia());
@@ -25,11 +25,11 @@ public class JogadorFuncs implements JogadorInterface {
         }
     }
 
-    @Override
-    public Jogador searchJogador(int idJogador) throws SQLException {
+    @Override //Procurar
+    public Jogador searchJogador(int id) throws SQLException {
         String sql = "SELECT * FROM jogador WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idJogador);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String nome = rs.getString("nome");
@@ -37,16 +37,16 @@ public class JogadorFuncs implements JogadorInterface {
                 int experiencia = rs.getInt("experiencia");
                 int categoria = rs.getInt("categoria");
                 if (experiencia >= 5) {
-                    return new JogadorVeterano(idJogador, nome, salario, experiencia, categoria);
+                    return new JogadorVeterano(id, nome, salario, experiencia, categoria);
                 } else {
-                    return new JogadorTrainee(idJogador, nome, salario, experiencia, categoria);
+                    return new JogadorTrainee(id, nome, salario, experiencia, categoria);
                 }
             }
             return null;
         }
     }
 
-    @Override
+    @Override //Atualizar
     public void uptJogador(Jogador jogador) throws SQLException {
         String sql = "UPDATE jogador SET nome = ?, salario = ?, experiencia = ?, categoria = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -54,12 +54,12 @@ public class JogadorFuncs implements JogadorInterface {
             stmt.setDouble(2, jogador.calcularSalario());
             stmt.setInt(3, jogador.getExperiencia());
             stmt.setInt(4, jogador.getCategoria());
-            stmt.setInt(5, jogador.getIdJogador());
+            stmt.setInt(5, jogador.getId());
             stmt.executeUpdate();
         }
     }
 
-    @Override
+    @Override //Remover
     public void delJogador(int idJogador) throws SQLException {
         String sql = "DELETE FROM jogador WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -70,7 +70,7 @@ public class JogadorFuncs implements JogadorInterface {
 
     @Override
     public List<Jogador> listJogadores() throws SQLException {
-        List<Jogador> jogador = new ArrayList<>();
+        List<Jogador> listaJogadores = new ArrayList<>(); 
         String sql = "SELECT * FROM jogador";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -80,15 +80,15 @@ public class JogadorFuncs implements JogadorInterface {
                 double salario = rs.getDouble("salario");
                 int experiencia = rs.getInt("experiencia");
                 int categoria = rs.getInt("categoria");
-                Jogador jogador;
+                Jogador jogador;  // Variável para instanciar o jogador
                 if (experiencia >= 5) {
                     jogador = new JogadorVeterano(idJogador, nome, salario, experiencia, categoria);
                 } else {
                     jogador = new JogadorTrainee(idJogador, nome, salario, experiencia, categoria);
                 }
-                jogador.add(jogador);
+                listaJogadores.add(jogador);
             }
         }
-        return jogador;
-    }
+        return listaJogadores;
+    }
 }
