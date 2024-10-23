@@ -35,7 +35,7 @@ create database jogadores_e_sports;
 use jogadores_e_sports;
 ```
 ```
-CREATE TABLE tipo_jogo (
+CREATE TABLE categoria_jogo (
       id INT NOT NULL AUTO_INCREMENT, 
       categoria VARCHAR(2), 
       descricao VARCHAR(100), 
@@ -48,7 +48,7 @@ CREATE TABLE jogador (
       experiencia INT NOT NULL, 
       categoria INT, 
       PRIMARY KEY(id), 
-      FOREIGN KEY (categoria) REFERENCES tipo_jogo(id));
+      FOREIGN KEY (categoria) REFERENCES categoria_jogo(id));
 ```
 ```
 desc jogador;
