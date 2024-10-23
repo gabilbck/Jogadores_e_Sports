@@ -47,7 +47,7 @@ CREATE TABLE jogador (
       salario DOUBLE NOT NULL, 
       experiencia INT NOT NULL, 
       categoria INT, 
-      PRIMARY KEY(idP), 
+      PRIMARY KEY(id), 
       FOREIGN KEY (categoria) REFERENCES tipo_jogo(id));
 ```
 ```
