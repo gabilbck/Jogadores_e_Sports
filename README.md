@@ -14,7 +14,12 @@ POO em Java e a classe Scanner
 </p>
 
 ### Bnaco de Dados (Única tabela):
-![image](https://github.com/user-attachments/assets/cdca6b9d-ba09-416b-882c-0d480bb4e129)
+
+<strong>jogador</strong><br>
+![image](https://github.com/user-attachments/assets/bcd14ba5-f05a-4ae3-b075-fb1b55cfe848)
+
+<strong>tipo_jogo</strong><br>
+![image](https://github.com/user-attachments/assets/2ae7fb15-53a5-4390-b983-7bb7d0cc0395)
 
 ### Comandos para criação/visualização do BDD:
 ```
