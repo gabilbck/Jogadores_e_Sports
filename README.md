@@ -35,9 +35,9 @@ create database jogadores_e_sports;
 use jogadores_e_sports;
 ```
 ```
-CREATE TABLE categoria_jogo (
+CREATE TABLE categoria (
       id INT NOT NULL AUTO_INCREMENT, 
-      categoria VARCHAR(2), 
+      nome VARCHAR(5), 
       descricao VARCHAR(100), 
       PRIMARY KEY(id));
 
