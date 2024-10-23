@@ -82,7 +82,7 @@ public class Main {
                     case 6:
                         List<Categoria> categoria = categoriaFuncs.listCategorias();
                         for (Categoria j : categoria) {
-                            System.out.println(j.getCategoria() + " - Descrição: " + j.getDescricao());
+                            System.out.println(j.getCategoria() + " - Descrição: " + j.getDesc());
                         }
                         break;
                         
