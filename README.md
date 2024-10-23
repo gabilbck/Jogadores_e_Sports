@@ -30,7 +30,20 @@ create database jogadores_e_sports;
 use jogadores_e_sports;
 ```
 ```
-create table jogador(id_jogador int not null, nome_jogador varchar(100) not null, salario_jogador double not null,  experiencia_jogador int not null, primary key(id_jogador));
+CREATE TABLE tipo_jogo (
+      id INT NOT NULL AUTO_INCREMENT, 
+      categoria VARCHAR(2), 
+      descricao VARCHAR(100), 
+      PRIMARY KEY(id));
+
+CREATE TABLE jogador (
+      id INT NOT NULL AUTO_INCREMENT, 
+      nome VARCHAR(100), 
+      salario DOUBLE NOT NULL, 
+      experiencia INT NOT NULL, 
+      categoria INT, 
+      PRIMARY KEY(idP), 
+      FOREIGN KEY (categoria) REFERENCES tipo_jogo(id));
 ```
 ```
 desc jogador;
