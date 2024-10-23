@@ -11,6 +11,7 @@ public class Main {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogador", "root", "password");
             JogadorFuncs jogadorFuncs = new JogadorFuncs(conn);
+            CategoriaFuncs categoriaFuncs = new CategoriaFuncs(conn);
 
             boolean running = true;
             while (running) {
@@ -72,13 +73,20 @@ public class Main {
                         break;
 
                     case 5:
-                        List<Jogador> jogadores = jogadorFuncs.listJogadores();
+                        List<Jogador> jogador = jogadorFuncs.listJogadores();
                         for (Jogador j : jogadores) {
                             System.out.println(j.getNome() + " - Salário: " + j.calcularSalario() + " - Categoria Jogada: " + j.getCategoria());
                         }
                         break;
 
                     case 6:
+                        List<Categoria> categoria = categoriaFuncs.listCategorias();
+                        for (Categoria j : categoria) {
+                            System.out.println(j.getCategoria() + " - Descrição: " + j.getDescricao());
+                        }
+                        break;
+                        
+                    case 7:
                         running = false;
                         break;
 
