@@ -18,12 +18,6 @@ POO em Java e a classe Scanner
 <strong>Diagrama (Planejamento)</strong><br>
 ![image](https://github.com/user-attachments/assets/4763604a-6c21-4291-a191-8b4ed9f325a8)
 
-<strong>jogador</strong><br>
-![image](https://github.com/user-attachments/assets/bcd14ba5-f05a-4ae3-b075-fb1b55cfe848)
-
-<strong>tipo_jogo</strong><br>
-![image](https://github.com/user-attachments/assets/2ae7fb15-53a5-4390-b983-7bb7d0cc0395)
-
 ### Comandos para criação/visualização do BDD:
 ```
 mysql -u root
