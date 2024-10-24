@@ -15,7 +15,7 @@ POO em Java e a classe Scanner
 
 ### Bnaco de Dados:
 
-<strong>Diagrama (Planejamento)</strong>
+<strong>Diagrama (Planejamento)</strong><br>
 ![image](https://github.com/user-attachments/assets/4763604a-6c21-4291-a191-8b4ed9f325a8)
 
 <strong>jogador</strong><br>
