@@ -68,7 +68,7 @@ desc categoria;
 desc equipe;
 ```
 
-###Registros de Teste:
+### Registros de Teste:
 ```
 INSERT INTO categoria (id, categoria, descricao)
 VALUES ("1", "Solo", "Nesta categoria os jogadores jogam de forma individual. Times sao proibidos.");
