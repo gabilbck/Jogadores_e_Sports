@@ -7,7 +7,7 @@ CREATE TABLE categoria (
 CREATE TABLE equipe (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
-    qt_Jogadores INT,
+    qt_jogadores INT,
     categoria_id INT,
     FOREIGN KEY (categoria_id) REFERENCES categoria(id)
 );
