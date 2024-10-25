@@ -16,7 +16,7 @@ POO em Java e a classe Scanner
 ### Bnaco de Dados:
 
 <strong>Diagrama (Planejamento)</strong><br>
-![image](https://github.com/user-attachments/assets/4763604a-6c21-4291-a191-8b4ed9f325a8)
+![image](https://github.com/user-attachments/assets/b54acfd5-9323-40c0-b56b-237b9fc56e12)
 
 ### Comandos para criação/visualização do BDD:
 ```
