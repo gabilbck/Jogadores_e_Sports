@@ -58,6 +58,13 @@ CREATE TABLE Jogador (
 );
 ```
 ```
+show tables;
+```
+```
 desc jogador;
+
+desc categoria;
+
+desc equipe;
 ```
 
