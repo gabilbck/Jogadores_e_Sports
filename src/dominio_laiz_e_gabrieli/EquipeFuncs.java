@@ -89,8 +89,6 @@ public class EquipeFuncs implements EquipeInterface{
                 if (qtJogadores > 1) {
                     equipe = new Equipe(id, nome, qtJogadores, categoria);
                     listaEquipes.add(equipe);
-                } else {
-                    System.out.println("Este jogador não possui equipe ou é solo");
                 }
             }
         } catch (SQLException ex) {
