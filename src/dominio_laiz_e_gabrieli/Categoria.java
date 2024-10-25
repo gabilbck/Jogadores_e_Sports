@@ -1,23 +1,23 @@
 package dominio_laiz_e_gabrieli;
 
 public abstract class Categoria {
-	    private int idCategoria;
-	    private String categoria;
+	    private int id;
+	    private String nome;
 	    private String descricao;
 
     	// Setters
-  	  public Categoria(int idCategoria, String categoria, String descricao) {
-  		  this.idCategoria = idCategoria;
-  		  this.categoria = categoria;
+  	  public Categoria(int id, String nome, String descricao) {
+  		  this.id = id;
+  		  this.nome = nome;
   		  this.descricao = descricao;
   	  }
 
     	// Getters
-  	  public int getIdCategoria() {
-  		  return idCategoria;
+  	  public int getId() {
+  		  return id;
   	  }
-  	  public String getCategoria() {
-  		  return categoria;
+  	  public String getNome() {
+  		  return nome;
   	  }
   	  public String getDesc() {
   		  return descricao;

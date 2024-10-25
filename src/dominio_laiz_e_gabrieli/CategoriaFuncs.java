@@ -3,7 +3,6 @@ package dominio_laiz_e_gabrieli;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.SQLException;
 
 public class CategoriaFuncs implements CategoriaInterface {
     private Connection conn;
@@ -11,26 +10,29 @@ public class CategoriaFuncs implements CategoriaInterface {
     public CategoriaFuncs(Connection conn) {
         this.conn = conn;
     }
-
+    
     @Override
-    public List<Categoria> listCategorias() throws SQLException {
-        List<Categoria> categoria = new ArrayList<>();
+    public List<Categoria> listCategorias() throws Exception {
+        List<Categoria> categorias = new ArrayList<>();
         String sql = "SELECT * FROM categoria";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                int idCategoria = rs.getInt("id");
-                String categoria = rs.getString("categoria");
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
                 String descricao = rs.getString("descricao");
                 Categoria categoria;
-                if (idCategoria == 1) {
-                    categoria = new CategoriaSolo(idCategoria, categoria, descricao);
+                if (id == 1) {
+                    categoria = new CategoriaSolo(id, nome, descricao);
                 } else {
-                    categoria = new CategoriaGrupo(idCategoria, categoria, descricao);
+                    categoria = new CategoriaGrupo(id, nome, descricao);
                 }
-                categoria.add(categoria);
+                categorias.add(categoria);
             }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao listar categorias: " + ex.getMessage());
+            throw new Exception("Erro ao listar categorias", ex);
         }
-        return categoria;
-    }
+        return categorias;
+    }
 }

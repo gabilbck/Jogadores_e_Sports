@@ -1,7 +1,7 @@
 package dominio_laiz_e_gabrieli;
 
 public class CategoriaSolo extends Categoria {
-    public CategoriaSolo(int idCategoria, String categoria, String descricao) {
-        super(idCategoria, categoria, descricao);
+    public CategoriaSolo(int id, String nome, String descricao) {
+        super(id, nome, descricao);
     }
 }

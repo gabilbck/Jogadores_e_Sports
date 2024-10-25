@@ -5,14 +5,16 @@ public abstract class Jogador {
 	private String nome;
 	private double salario;
 	private int experiencia;
+	private int equipe;
 	private int categoria;
 
     	// Setters
-	public Jogador(int id, String nome, double salario, int experiencia, int categoria) {
+	public Jogador(int id, String nome, double salario, int experiencia, int equipe, int categoria) {
 		this.id = id;
 		this.nome = nome;
 		this.salario = salario;
 		this.experiencia = experiencia;
+		this.equipe = equipe;
 		this.categoria = categoria;
 	}
 
@@ -29,7 +31,9 @@ public abstract class Jogador {
 	public int getExperiencia() {
 		return experiencia;
 	}
-	
+	public int getEquipe() {
+		return equipe;
+	}
 	public int getCategoria() {
 		return categoria;
 	}

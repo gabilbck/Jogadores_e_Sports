@@ -32,20 +32,30 @@ create database jogadores_e_sports;
 use jogadores_e_sports;
 ```
 ```
-CREATE TABLE categoria (
-      id INT NOT NULL AUTO_INCREMENT, 
-      nome VARCHAR(5), 
-      descricao VARCHAR(100), 
-      PRIMARY KEY(id));
+CREATE TABLE Categoria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    descricao VARCHAR(255)
+);
 
-CREATE TABLE jogador (
-      id INT NOT NULL AUTO_INCREMENT, 
-      nome VARCHAR(100), 
-      salario DOUBLE NOT NULL, 
-      experiencia INT NOT NULL, 
-      categoria INT, 
-      PRIMARY KEY(id), 
-      FOREIGN KEY (categoria) REFERENCES categoria(id));
+CREATE TABLE Equipe (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    qt_Jogadores INT,
+    categoria_id INT,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
+);
+
+CREATE TABLE Jogador (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    salario DOUBLE,
+    experiencia INT,
+    equipe_id INT,
+    categoria_id INT,
+    FOREIGN KEY (equipe_id) REFERENCES Equipe(id),
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
+);
 ```
 ```
 desc jogador;

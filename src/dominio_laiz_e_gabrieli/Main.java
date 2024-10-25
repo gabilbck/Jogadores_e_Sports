@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogador", "root", "password");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogadores_e_sports", "root", "password");
             JogadorFuncs jogadorFuncs = new JogadorFuncs(conn);
             CategoriaFuncs categoriaFuncs = new CategoriaFuncs(conn);
 
@@ -41,9 +41,9 @@ public class Main {
 
                         Jogador jogador;
                         if (anosTreino >= 5) {
-                            jogador = new JogadorVeterano(codigo, nome, salario, anosTreino, categoria);
+                            jogador = new JogadorVeterano(id, nome, salario, experiencia, equipe, categoria);
                         } else {
-                            jogador = new JogadorTrainee(codigo, nome, salario, anosTreino, categoria);
+                            jogador = new JogadorTrainee(id, nome, salario, experiencia, equipe, categoria);
                         }
                         jogadorFuncs.addJogador(jogador);
                         System.out.println("Jogador adicionado com sucesso.");
