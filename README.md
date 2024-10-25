@@ -32,29 +32,29 @@ create database jogadores_e_sports;
 use jogadores_e_sports;
 ```
 ```
-CREATE TABLE Categoria (
+CREATE TABLE categoria (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     descricao VARCHAR(255)
 );
 
-CREATE TABLE Equipe (
+CREATE TABLE equipe (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     qt_Jogadores INT,
     categoria_id INT,
-    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
+    FOREIGN KEY (categoria_id) REFERENCES categoria(id)
 );
 
-CREATE TABLE Jogador (
+CREATE TABLE jogador (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     salario DOUBLE,
     experiencia INT,
     equipe_id INT,
     categoria_id INT,
-    FOREIGN KEY (equipe_id) REFERENCES Equipe(id),
-    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
+    FOREIGN KEY (equipe_id) REFERENCES equipe(id),
+    FOREIGN KEY (categoria_id) REFERENCES categoria(id)
 );
 ```
 ```
@@ -68,3 +68,23 @@ desc categoria;
 desc equipe;
 ```
 
+###Registros de Teste:
+```
+INSERT INTO categoria (id, categoria, descricao)
+VALUES ("1", "Solo", "Nesta categoria os jogadores jogam de forma individual. Times sao proibidos.");
+
+INSERT INTO categoria (id, categoria, descricao)
+VALUES ("2", "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
+
+INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
+VALUES ("", "Diamond", "5", "2");
+
+INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
+VALUES ("", "Stars", "6", "2");
+
+INSERT INTO jogador(id, nome, salario, experiencia, equipe_id, categoria_id)
+VALUES ("", "Joao", "3500.00", "2", "1", "2");
+
+INSERT INTO jogador(id, nome, salario, experiencia, equipe_id, categoria_id)
+VALUES ("", "Lucas", "9500.00", "6", NULL, "1");
+```
