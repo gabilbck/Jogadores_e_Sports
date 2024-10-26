@@ -8,8 +8,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Connection conn = null;
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogadores_e_sports", "root", "password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogadores_e_sports", "root", "password");
             JogadorFuncs jogadorFuncs = new JogadorFuncs(conn);
             CategoriaFuncs categoriaFuncs = new CategoriaFuncs(conn);
 
@@ -64,8 +65,32 @@ public class Main {
                         break;
 
                     case 3:
-                        // Similar à adição, mas com atualização
-                        // fazer depois
+                        System.out.print("Digite o código do jogador para atualizar: ");
+                        int codigoAtualizar = scanner.nextInt();
+                        scanner.nextLine(); 
+                        Jogador jogadorExistente = jogadorFuncs.searchJogador(codigoAtualizar);
+                        if (jogadorExistente != null) {
+                            System.out.print("Digite o novo nome: ");
+                            nome = scanner.nextLine();
+                            System.out.print("Digite o novo salário: ");
+                            salario = scanner.nextDouble();
+                            System.out.print("Digite os novos anos de treino: ");
+                            anosTreino = scanner.nextInt();
+                            System.out.print("Digite o novo ID da equipe: ");
+                            equipeId = scanner.nextInt();
+                            System.out.print("Digite a nova categoria (1 para solo e 2 para grupo): ");
+                            categoriaId = scanner.nextInt();
+
+                            Jogador jogadorAtualizado;
+                            if (anosTreino >= 5) {
+                                jogadorAtualizado = new JogadorVeterano(codigoAtualizar, nome, salario, anosTreino, equipeId, categoriaId);
+                            } else {
+                                jogadorAtualizado = new JogadorTrainee(codigoAtualizar, nome, salario, anosTreino, equipeId, categoriaId);
+                            }
+                            jogadorFuncs.uptJogador(jogadorAtualizado);
+                        } else {
+                            System.out.println("Jogador não encontrado.");
+                        }
                         break;
 
                     case 4:
@@ -83,9 +108,9 @@ public class Main {
                         break;
 
                     case 6:
-                        List<Categoria> categoria = categoriaFuncs.listCategorias();
-                        for (Categoria j : categoria) {
-                            System.out.println(j.getCategoria() + " - Descrição: " + j.getDesc());
+                        List<Categoria> categorias = categoriaFuncs.listCategorias();
+                        for (Categoria c : categorias) {
+                            System.out.println(c.getCategoria() + " - Descrição: " + c.getDesc());
                         }
                         break;
                         
@@ -94,15 +119,22 @@ public class Main {
                         break;
 
                     default:
-                        System.out.println("Opção inválida.");
+                        System.out.println("Opção inválida. Tente novamente.");
                         break;
                 }
             }
 
-            conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Erro na conexão com o banco de dados: " + e.getMessage());
             e.printStackTrace();
         } finally {
+            try {
+                if (conn != null && !conn.isClosed()) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             scanner.close();
         }
     }
