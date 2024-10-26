@@ -23,11 +23,18 @@ CREATE TABLE jogador (
     FOREIGN KEY (categoria_id) REFERENCES categoria(id)
 );
 
+
 /*
 criando as duas categorias:
 id-> 1 - solo
 id-> 2 - grupo
 */
+
+INSERT INTO categoria (id, nome, descricao)
+VALUES (1, "Solo", "Nesta categoria os jogadores jogam de forma individual. Times são proibidos."),
+       (2, "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
+
+-- ou
 
 INSERT INTO categoria (id, categoria, descricao)
 VALUES ("1", "Solo", "Nesta categoria os jogadores jogam de forma individual. Times sao proibidos.");
@@ -38,6 +45,12 @@ VALUES ("2", "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
 /*
 criando duas equipes base/exemplo:
 */
+
+INSERT INTO equipe (nome, qt_jogadores, categoria_id)
+VALUES ("Diamond", 5, 2),
+       ("Stars", 6, 2);
+
+-- ou
 
 INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
 VALUES ("", "Diamond", "5", "2");
