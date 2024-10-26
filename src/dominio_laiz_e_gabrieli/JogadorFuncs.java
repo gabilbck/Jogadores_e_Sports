@@ -24,9 +24,10 @@ public class JogadorFuncs implements JogadorInterface {
             System.out.println("Jogador cadastrado com sucesso!");
         } catch (SQLException ex) {
             System.out.println("Erro ao cadastrar jogador: " + ex.getMessage());
+            throw ex;
         }
     }
-
+    
     @Override // Procurar
     public Jogador searchJogador(int id) throws SQLException {
         String sql = "SELECT * FROM jogador WHERE id = ?";
@@ -47,6 +48,7 @@ public class JogadorFuncs implements JogadorInterface {
             }
         } catch (SQLException ex) {
             System.out.println("Erro ao buscar jogador: " + ex.getMessage());
+            throw ex;
         }
         return null;
     }
@@ -60,13 +62,15 @@ public class JogadorFuncs implements JogadorInterface {
             stmt.setInt(3, jogador.getExperiencia());
             stmt.setInt(4, jogador.getEquipe());
             stmt.setInt(5, jogador.getCategoria());
+            stmt.setInt(6, jogador.getId());
             stmt.executeUpdate();
             System.out.println("Jogador atualizado com sucesso!");
         } catch (SQLException ex) {
             System.out.println("Erro ao atualizar jogador: " + ex.getMessage());
+            throw ex;
         }
     }
-
+    
     @Override // Remover
     public void delJogador(int id) throws SQLException {
         String sql = "DELETE FROM jogador WHERE id = ?";
@@ -76,6 +80,7 @@ public class JogadorFuncs implements JogadorInterface {
             System.out.println("Jogador removido com sucesso!");
         } catch (SQLException ex) {
             System.out.println("Erro ao remover jogador: " + ex.getMessage());
+            throw ex;
         }
     }
 
@@ -84,7 +89,7 @@ public class JogadorFuncs implements JogadorInterface {
         List<Jogador> listaJogadores = new ArrayList<>();
         String sql = "SELECT * FROM jogador";
         try (Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
+             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
@@ -103,6 +108,7 @@ public class JogadorFuncs implements JogadorInterface {
             }
         } catch (SQLException ex) {
             System.out.println("Erro ao listar jogadores: " + ex.getMessage());
+            throw ex;
         }
         return listaJogadores;
     }
