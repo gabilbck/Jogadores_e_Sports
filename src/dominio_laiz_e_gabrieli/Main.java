@@ -25,25 +25,28 @@ public class Main {
                 System.out.println("7. Sair");
 
                 int opcao = scanner.nextInt();
+                scanner.nextLine(); // para limpar o buffer do teclado... e não dar aqueles erros igual na aula do manfred
                 switch (opcao) {
                     case 1:
                         System.out.print("Digite o código: ");
                         int codigo = scanner.nextInt();
-                        scanner.nextLine();  // Limpa o buffer
+                        scanner.nextLine(); 
                         System.out.print("Digite o nome: ");
                         String nome = scanner.nextLine();
                         System.out.print("Digite o salário: ");
                         double salario = scanner.nextDouble();
                         System.out.print("Digite os anos de treino: ");
                         int anosTreino = scanner.nextInt();
+                        System.out.print("Digite o ID da equipe: ");
+                        int equipeId = scanner.nextInt();
                         System.out.print("Digite a categoria (1 para solo e 2 para grupo): ");
-                        int categoria = scanner.nextInt();
+                        int categoriaId = scanner.nextInt();
 
                         Jogador jogador;
                         if (anosTreino >= 5) {
-                            jogador = new JogadorVeterano(id, nome, salario, experiencia, equipe, categoria);
+                            jogador = new JogadorVeterano(codigo, nome, salario, anosTreino, equipeId, categoriaId);
                         } else {
-                            jogador = new JogadorTrainee(id, nome, salario, experiencia, equipe, categoria);
+                            jogador = new JogadorTrainee(codigo, nome, salario, anosTreino, equipeId, categoriaId);
                         }
                         jogadorFuncs.addJogador(jogador);
                         System.out.println("Jogador adicionado com sucesso.");
@@ -73,7 +76,7 @@ public class Main {
                         break;
 
                     case 5:
-                        List<Jogador> jogador = jogadorFuncs.listJogadores();
+                        List<Jogador> jogadores = jogadorFuncs.listJogadores();
                         for (Jogador j : jogadores) {
                             System.out.println(j.getNome() + " - Salário: " + j.calcularSalario() + " - Categoria Jogada: " + j.getCategoria());
                         }
@@ -101,6 +104,6 @@ public class Main {
             e.printStackTrace();
         } finally {
             scanner.close();
-        }
-    }
+        }
+    }
 }
