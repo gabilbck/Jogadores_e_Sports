@@ -1,8 +1,8 @@
 # Jogadores_e_Sports
 
-Gabrieli Eduarda Lembeck
+Gabrieli Eduarda Lembeck <a href=""></a>
 <br>
-Laiz Bordinhão Detros
+Laiz Bordinhão Detros <a href=""></a>
 
 ### Problema:
 <p>
