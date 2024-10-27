@@ -30,8 +30,8 @@ public class Main {
                 scanner.nextLine(); // para limpar o buffer do teclado... e não dar aqueles erros igual na aula do manfred
                 switch (opcao) {
                     case 1:
-                        System.out.print("Digite o código: ");
-                        int codigo = scanner.nextInt();
+                        System.out.print("Digite o id: ");
+                        int id = scanner.nextInt();
                         scanner.nextLine(); 
                         System.out.print("Digite o nome: ");
                         String nome = scanner.nextLine();
@@ -46,16 +46,16 @@ public class Main {
 
                         Jogador jogador;
                         if (anosTreino >= 5) {
-                            jogador = new JogadorVeterano(codigo, nome, salario, anosTreino, equipeId, categoriaId);
+                            jogador = new JogadorVeterano(id, nome, salario, experiencia, equipeId, categoriaId);
                         } else {
-                            jogador = new JogadorTrainee(codigo, nome, salario, anosTreino, equipeId, categoriaId);
+                            jogador = new JogadorTrainee(id, nome, salario, experiencia, equipeId, categoriaId);
                         }
                         jogadorFuncs.addJogador(jogador);
                         System.out.println("Jogador adicionado com sucesso.");
                         break;
 
                     case 2:
-                        System.out.print("Digite o código do jogador: ");
+                        System.out.print("Digite o id do jogador: ");
                         int codigoBusca = scanner.nextInt();
                         Jogador jogadorBuscado = jogadorFuncs.searchJogador(codigoBusca);
                         if (jogadorBuscado != null) {
@@ -66,10 +66,10 @@ public class Main {
                         break;
 
                     case 3:
-                        System.out.print("Digite o código do jogador para atualizar: ");
-                        int codigoAtualizar = scanner.nextInt();
+                        System.out.print("Digite o id do jogador para atualizar: ");
+                        int id = scanner.nextInt();
                         scanner.nextLine(); 
-                        Jogador jogadorExistente = jogadorFuncs.searchJogador(codigoAtualizar);
+                        Jogador jogadorExistente = jogadorFuncs.searchJogador(id);
                         if (jogadorExistente != null) {
                             System.out.print("Digite o novo nome: ");
                             nome = scanner.nextLine();
@@ -85,9 +85,9 @@ public class Main {
 
                             Jogador jogadorAtualizado;
                             if (anosTreino >= 5) {
-                                jogadorAtualizado = new JogadorVeterano(codigoAtualizar, nome, salario, anosTreino, equipeId, categoriaId);
+                                jogadorAtualizado = new JogadorVeterano(id, nome, salario, experiencia, equipeId, categoriaId);
                             } else {
-                                jogadorAtualizado = new JogadorTrainee(codigoAtualizar, nome, salario, anosTreino, equipeId, categoriaId);
+                                jogadorAtualizado = new JogadorTrainee(id, nome, salario, experiencia, equipeId, categoriaId);
                             }
                             jogadorFuncs.uptJogador(jogadorAtualizado);
                         } else {
@@ -96,7 +96,7 @@ public class Main {
                         break;
 
                     case 4:
-                        System.out.print("Digite o código do jogador para deletar: ");
+                        System.out.print("Digite o id do jogador para deletar: ");
                         int codigoDeletar = scanner.nextInt();
                         jogadorFuncs.delJogador(codigoDeletar);
                         System.out.println("Jogador deletado com sucesso.");
