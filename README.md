@@ -75,7 +75,7 @@ VALUES (1, "Solo", "Nesta categoria os jogadores jogam de forma individual. Time
        (2, "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
 
 INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
-VALUES (1, "Sem Equipe", 0, 1) 
+VALUES (1, "Sem Equipe", 0, 1),
        (2, "Diamond", 5, 2),
        (3, "Stars", 6, 2);
 
