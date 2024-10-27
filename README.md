@@ -1,6 +1,7 @@
 # Jogadores_e_Sports
 
 Gabrieli Eduarda Lembeck
+<br>
 Laiz Bordinhão Detros
 
 ### Problema:
