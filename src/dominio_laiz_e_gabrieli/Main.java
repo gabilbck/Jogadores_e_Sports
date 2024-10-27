@@ -56,8 +56,8 @@ public class Main {
 
                     case 2:
                         System.out.print("Digite o id do jogador: ");
-                        int codigoBusca = scanner.nextInt();
-                        Jogador jogadorBuscado = jogadorFuncs.searchJogador(codigoBusca);
+                        int id = scanner.nextInt();
+                        Jogador jogadorBuscado = jogadorFuncs.searchJogador(id);
                         if (jogadorBuscado != null) {
                             System.out.println("Jogador encontrado: " + jogadorBuscado.getNome());
                         } else {
@@ -97,8 +97,8 @@ public class Main {
 
                     case 4:
                         System.out.print("Digite o id do jogador para deletar: ");
-                        int codigoDeletar = scanner.nextInt();
-                        jogadorFuncs.delJogador(codigoDeletar);
+                        int id = scanner.nextInt();
+                        jogadorFuncs.delJogador(id);
                         System.out.println("Jogador deletado com sucesso.");
                         break;
 
