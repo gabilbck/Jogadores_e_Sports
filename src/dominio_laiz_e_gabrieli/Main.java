@@ -26,13 +26,12 @@ public class Main {
                 System.out.println("6. Listar Categorias");
                 System.out.println("7. Sair");
 
+                int id;
                 int opcao = scanner.nextInt();
                 scanner.nextLine(); // para limpar o buffer do teclado... e não dar aqueles erros igual na aula do manfred
                 switch (opcao) {
-                    case 1:
-                        System.out.print("Digite o id: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine(); 
+                    case 1:	
+                    	id = 0;
                         System.out.print("Digite o nome: ");
                         String nome = scanner.nextLine();
                         System.out.print("Digite o salário: ");
@@ -56,7 +55,7 @@ public class Main {
 
                     case 2:
                         System.out.print("Digite o id do jogador: ");
-                        int id = scanner.nextInt();
+                        id = scanner.nextInt();
                         Jogador jogadorBuscado = jogadorFuncs.searchJogador(id);
                         if (jogadorBuscado != null) {
                             System.out.println("Jogador encontrado: " + jogadorBuscado.getNome());
@@ -67,7 +66,7 @@ public class Main {
 
                     case 3:
                         System.out.print("Digite o id do jogador para atualizar: ");
-                        int id = scanner.nextInt();
+                        id = scanner.nextInt();
                         scanner.nextLine(); 
                         Jogador jogadorExistente = jogadorFuncs.searchJogador(id);
                         if (jogadorExistente != null) {
@@ -97,7 +96,7 @@ public class Main {
 
                     case 4:
                         System.out.print("Digite o id do jogador para deletar: ");
-                        int id = scanner.nextInt();
+                        id = scanner.nextInt();
                         jogadorFuncs.delJogador(id);
                         System.out.println("Jogador deletado com sucesso.");
                         break;
