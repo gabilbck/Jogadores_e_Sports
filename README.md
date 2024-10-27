@@ -81,8 +81,8 @@ INSERT INTO equipe (id, nome, categoria_id)
 VALUES ("3", "Stars", "2");
 
 INSERT INTO jogador(id, nome, salario_bruto, salario_total_recebido, experiencia, equipe_id, categoria_id)
-VALUES ("1", "Joao", "3500.00", "0", "2", "1", "2");
+VALUES ("1", "Joao", "3500.00", "0", "2", "2", "2");
 
 INSERT INTO jogador(id, nome, salario_bruto, salario_total_recebido, experiencia, equipe_id, categoria_id)
-VALUES ("2", "Lucas", "9500.00", "0", "6", NULL, "1");
+VALUES ("2", "Lucas", "9500.00", "0", "6", 1, "1");
 ```
