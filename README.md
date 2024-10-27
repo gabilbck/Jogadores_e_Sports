@@ -1,8 +1,8 @@
 # Jogadores_e_Sports
 
-Gabrieli Eduarda Lembeck <a href="https://github.com/gabilbck"></a>
+<a href="https://github.com/gabilbck">Gabrieli Eduarda Lembeck</a>
 <br>
-Laiz Bordinhão Detros <a href=""></a>
+<a href="https://github.com/MegamiAy">Laiz Bordinhão Detros</a>
 
 ### Problema:
 <p>
