@@ -1,6 +1,6 @@
 # Jogadores_e_Sports
 
-Gabrieli Eduarda Lembeck <a href=""></a>
+Gabrieli Eduarda Lembeck <a href="https://github.com/gabilbck"></a>
 <br>
 Laiz Bordinhão Detros <a href=""></a>
 
