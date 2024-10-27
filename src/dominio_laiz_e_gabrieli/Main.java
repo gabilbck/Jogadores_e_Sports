@@ -2,6 +2,7 @@ package dominio_laiz_e_gabrieli;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogadores_e_sports", "root", "password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogadores_e_sports", "root", "");
             JogadorFuncs jogadorFuncs = new JogadorFuncs(conn);
             CategoriaFuncs categoriaFuncs = new CategoriaFuncs(conn);
 
@@ -72,6 +73,7 @@ public class Main {
                         if (jogadorExistente != null) {
                             System.out.print("Digite o novo nome: ");
                             nome = scanner.nextLine();
+                            scanner.nextLine(); 
                             System.out.print("Digite o novo salário: ");
                             salario = scanner.nextDouble();
                             System.out.print("Digite os novos anos de treino: ");
@@ -108,10 +110,15 @@ public class Main {
                         break;
 
                     case 6:
-                        List<Categoria> categorias = categoriaFuncs.listCategorias();
-                        for (Categoria c : categorias) {
-                            System.out.println(c.getCategoria() + " - Descrição: " + c.getDesc());
-                        }
+                    	try {
+                    		List<Categoria> categorias = categoriaFuncs.listCategorias();
+                            for (Categoria c : categorias) {
+                                System.out.println(c.getNome() + " - Descrição: " + c.getDesc());
+                            }
+                    	} catch (Exception e) {
+                    	    System.out.println("Erro: " + e.getMessage());
+                    	    e.printStackTrace();
+                    	}
                         break;
                         
                     case 7:
