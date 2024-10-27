@@ -1,5 +1,8 @@
 # Jogadores_e_Sports
 
+Gabrieli Eduarda Lembeck
+Laiz Bordinhão Detros
+
 ### Problema:
 <p>
   Desenvolva operações CRUD para instanciar objetos jogadores 
