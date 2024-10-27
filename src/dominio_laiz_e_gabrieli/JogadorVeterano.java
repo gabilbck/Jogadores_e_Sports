@@ -5,7 +5,7 @@ public class JogadorVeterano extends Jogador {
 	
     public JogadorVeterano(int id, String nome, double salario, int experiencia, int equipe,int categoria) {
         super(id, nome, salario, experiencia, equipe, categoria);
-        this.
+        this.salarioAtualizado = salarioAtualizado;
     }
 
     @Override
