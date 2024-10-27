@@ -70,10 +70,10 @@ desc equipe;
 
 ### Registros de Teste:
 ```
-INSERT INTO categoria (id, categoria, descricao)
+INSERT INTO categoria (id, nome, descricao)
 VALUES ("1", "Solo", "Nesta categoria os jogadores jogam de forma individual. Times sao proibidos.");
 
-INSERT INTO categoria (id, categoria, descricao)
+INSERT INTO categoria (id, nome, descricao)
 VALUES ("2", "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
 
 INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
