@@ -17,10 +17,9 @@ public class EquipeFuncs implements EquipeInterface{
 
 	@Override
 	public void addEquipe(Equipe equipe) throws Exception {
-		String sql = "INSERT INTO equipe (nome, qt_jogadores, categoria) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO equipe (nome, qt_jogadores, categoria) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, equipe.getNome());
-            stmt.setDouble(2, equipe.getQtJogadores());
             stmt.setInt(3, equipe.getCategoria());
             stmt.executeUpdate();
             System.out.println("Equipe cadastrada com sucesso!");
@@ -37,9 +36,8 @@ public class EquipeFuncs implements EquipeInterface{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String nome = rs.getString("nome");
-                int qtJogadores = rs.getInt("qt_jogadores");
                 int categoria = rs.getInt("categoria_id");
-                return new Equipe(id, nome, qtJogadores, categoria);
+                return new Equipe(id, nome, categoria);
             }
         } catch (SQLException ex) {
             System.out.println("Erro ao buscar equipe: " + ex.getMessage());
@@ -49,11 +47,10 @@ public class EquipeFuncs implements EquipeInterface{
 
 	@Override
 	public void uptEquipe(Equipe equipe) throws Exception {
-		String sql = "UPDATE equipe SET nome = ?, qt_jogadores = ?, categoria_id = ? WHERE id = ?";
+		String sql = "UPDATE equipe SET nome = ?, categoria_id = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, equipe.getNome());
-            stmt.setDouble(2, equipe.getQtJogadores());
-            stmt.setInt(3, equipe.getCategoria());
+            stmt.setInt(2, equipe.getCategoria());
             stmt.executeUpdate();
             System.out.println("Equipe atualizada com sucesso!");
         } catch (SQLException ex) {
@@ -82,14 +79,10 @@ public class EquipeFuncs implements EquipeInterface{
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
-                int qtJogadores = rs.getInt("qt_jogadores");
                 int categoria = rs.getInt("categoria_id");
-
                 Equipe equipe;
-                if (qtJogadores > 1) {
-                    equipe = new Equipe(id, nome, qtJogadores, categoria);
-                    listaEquipes.add(equipe);
-                }
+                equipe = new Equipe(id, nome, categoria);
+                listaEquipes.add(equipe);
             }
         } catch (SQLException ex) {
             System.out.println("Erro ao listar equipes: " + ex.getMessage());

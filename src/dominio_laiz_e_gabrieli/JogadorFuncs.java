@@ -13,13 +13,14 @@ public class JogadorFuncs implements JogadorInterface {
 
     @Override // Cadastrar
     public void addJogador(Jogador jogador) throws SQLException {
-        String sql = "INSERT INTO jogador (nome, salario, experiencia, equipe_id, categoria_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO jogador (nome, salario_bruto, salario_total_recebido, experiencia, equipe_id, categoria_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, jogador.getNome());
-            stmt.setDouble(2, jogador.getSalario());
-            stmt.setInt(3, jogador.getExperiencia());
-            stmt.setInt(4, jogador.getEquipe());
-            stmt.setInt(5, jogador.getCategoria());
+            stmt.setDouble(2, jogador.getSalarioBruto());
+            stmt.setDouble(3, jogador.getSalarioTotalRecebido());
+            stmt.setInt(4, jogador.getExperiencia());
+            stmt.setInt(5, jogador.getEquipe());
+            stmt.setInt(6, jogador.getCategoria());
             stmt.executeUpdate();
             System.out.println("Jogador cadastrado com sucesso!");
         } catch (SQLException ex) {
@@ -36,14 +37,15 @@ public class JogadorFuncs implements JogadorInterface {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String nome = rs.getString("nome");
-                double salario = rs.getDouble("salario");
+                double salarioBruto = rs.getDouble("salario_bruto");
+                double salarioTotalRecebido = rs.getDouble("salario_total_recebido");
                 int experiencia = rs.getInt("experiencia");
                 int equipe = rs.getInt("equipe_id");
                 int categoria = rs.getInt("categoria_id");
                 if (experiencia >= 5) {
-                    return new JogadorVeterano(id, nome, salario, experiencia, equipe, categoria);
+                    return new JogadorVeterano(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipe, categoria);
                 } else {
-                    return new JogadorTrainee(id, nome, salario, experiencia, equipe, categoria);
+                    return new JogadorTrainee(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipe, categoria);
                 }
             }
         } catch (SQLException ex) {
@@ -55,22 +57,23 @@ public class JogadorFuncs implements JogadorInterface {
 
     @Override // Atualizar
     public void uptJogador(Jogador jogador) throws SQLException {
-        String sql = "UPDATE jogador SET nome = ?, salario = ?, experiencia = ?, equipe_id = ?, categoria_id = ? WHERE id = ?";
+        String sql = "UPDATE jogador SET nome = ?, salario_bruto = ?, salario_total_recebido = ?, experiencia = ?, equipe_id = ?, categoria_id = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, jogador.getNome());
-            stmt.setDouble(2, jogador.getSalario());
-            stmt.setInt(3, jogador.getExperiencia());
-            stmt.setInt(4, jogador.getEquipe());
-            stmt.setInt(5, jogador.getCategoria());
-            stmt.setInt(6, jogador.getId());
+            stmt.setDouble(2, jogador.getSalarioBruto());
+            stmt.setDouble(3, jogador.getSalarioTotalRecebido());
+            stmt.setInt(4, jogador.getExperiencia());
+            stmt.setInt(5, jogador.getEquipe());
+            stmt.setInt(6, jogador.getCategoria());
+            stmt.setInt(7, jogador.getId());
             stmt.executeUpdate();
     
             if (jogador.getExperiencia() >= 5) {
                 delJogador(jogador.getId());
-                addJogador(new JogadorVeterano(jogador.getId(), jogador.getNome(), jogador.getSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
+                addJogador(new JogadorVeterano(jogador.getId(), jogador.getNome(), jogador.getSalarioBruto(), jogador.getSalarioTotalRecebido(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
             } else {
                 delJogador(jogador.getId());
-                addJogador(new JogadorTrainee(jogador.getId(), jogador.getNome(), jogador.getSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
+                addJogador(new JogadorTrainee(jogador.getId(), jogador.getNome(), jogador.getSalarioBruto(), jogador.getSalarioTotalRecebido(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
             }
     
             System.out.println("Jogador atualizado com sucesso!");
@@ -102,16 +105,17 @@ public class JogadorFuncs implements JogadorInterface {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
-                double salario = rs.getDouble("salario");
+                double salarioBruto = rs.getDouble("salario_bruto");
+                double salarioTotalRecebido = rs.getDouble("salario_total_recebido");
                 int experiencia = rs.getInt("experiencia");
                 int equipe = rs.getInt("equipe_id");
                 int categoria = rs.getInt("categoria_id");
 
                 Jogador jogador;
                 if (experiencia >= 5) {
-                    jogador = new JogadorVeterano(id, nome, salario, experiencia, equipe, categoria);
+                    jogador = new JogadorVeterano(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipe, categoria);
                 } else {
-                    jogador = new JogadorTrainee(id, nome, salario, experiencia, equipe, categoria);
+                    jogador = new JogadorTrainee(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipe, categoria);
                 }
                 listaJogadores.add(jogador);
             }
@@ -121,4 +125,42 @@ public class JogadorFuncs implements JogadorInterface {
         }
         return listaJogadores;
     }
+    
+    @Override // Receber salário
+    public void receberSalario(int id, double salarioRecebido) throws SQLException {
+    	String selectSql = "SELECT experiencia FROM jogador WHERE id = ?";
+        String updateSql = "UPDATE jogador SET salario_total_recebido = salario_total_recebido + ? WHERE id = ?";
+        try (PreparedStatement selectStmt = conn.prepareStatement(selectSql);
+             PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+            
+            // Verifica a experiência do jogador
+            selectStmt.setInt(1, id);
+            ResultSet rs = selectStmt.executeQuery();
+            if (rs.next()) {
+                int experiencia = rs.getInt("experiencia");
+                
+                // Aplica um bônus de 10% ao salário se for veterano
+                if (experiencia >= 5) {
+                    salarioRecebido *= 1.10;
+                }
+            } else {
+                System.out.println("Jogador com ID " + id + " não encontrado.");
+                return;
+            }
+
+            // Atualiza o salário total recebido
+            updateStmt.setDouble(1, salarioRecebido);
+            updateStmt.setInt(2, id);
+            int linhasAfetadas = updateStmt.executeUpdate();
+            if (linhasAfetadas > 0) {
+                System.out.println("Salário atualizado no banco de dados com sucesso.");
+            } else {
+                System.out.println("Jogador com ID " + id + " não encontrado.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao atualizar salário: " + ex.getMessage());
+            throw ex;
+        }
+    }
+
 }
