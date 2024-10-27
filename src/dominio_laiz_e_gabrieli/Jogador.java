@@ -7,6 +7,7 @@ public abstract class Jogador {
 	private int experiencia;
 	private int equipe;
 	private int categoria;
+	protected double salarioAtualizado;
 
     	// Setters
 	public Jogador(int id, String nome, double salario, int experiencia, int equipe, int categoria) {
@@ -16,6 +17,7 @@ public abstract class Jogador {
 		this.experiencia = experiencia;
 		this.equipe = equipe;
 		this.categoria = categoria;
+		this.salarioAtualizado = getSalario();
 	}
 
     	// Getters
@@ -37,7 +39,10 @@ public abstract class Jogador {
 	public int getCategoria() {
 		return categoria;
 	}
+	public double getSalarioAtualizado() {
+		return salarioAtualizado;
+	}
 	
 	// Metodos
-	public abstract double calcularSalario();
+	public abstract double atualizarSalario();
 }

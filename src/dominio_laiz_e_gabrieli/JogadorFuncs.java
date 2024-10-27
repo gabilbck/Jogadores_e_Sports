@@ -16,7 +16,7 @@ public class JogadorFuncs implements JogadorInterface {
         String sql = "INSERT INTO jogador (nome, salario, experiencia, equipe_id, categoria_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, jogador.getNome());
-            stmt.setDouble(2, jogador.calcularSalario());
+            stmt.setDouble(2, jogador.getSalario());
             stmt.setInt(3, jogador.getExperiencia());
             stmt.setInt(4, jogador.getEquipe());
             stmt.setInt(5, jogador.getCategoria());
@@ -58,7 +58,7 @@ public class JogadorFuncs implements JogadorInterface {
         String sql = "UPDATE jogador SET nome = ?, salario = ?, experiencia = ?, equipe_id = ?, categoria_id = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, jogador.getNome());
-            stmt.setDouble(2, jogador.calcularSalario());
+            stmt.setDouble(2, jogador.getSalario());
             stmt.setInt(3, jogador.getExperiencia());
             stmt.setInt(4, jogador.getEquipe());
             stmt.setInt(5, jogador.getCategoria());
@@ -67,10 +67,10 @@ public class JogadorFuncs implements JogadorInterface {
     
             if (jogador.getExperiencia() >= 5) {
                 delJogador(jogador.getId());
-                addJogador(new JogadorVeterano(jogador.getId(), jogador.getNome(), jogador.calcularSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
+                addJogador(new JogadorVeterano(jogador.getId(), jogador.getNome(), jogador.getSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
             } else {
                 delJogador(jogador.getId());
-                addJogador(new JogadorTrainee(jogador.getId(), jogador.getNome(), jogador.calcularSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
+                addJogador(new JogadorTrainee(jogador.getId(), jogador.getNome(), jogador.getSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
             }
     
             System.out.println("Jogador atualizado com sucesso!");
