@@ -47,10 +47,14 @@ criando duas equipes base/exemplo:
 */
 
 INSERT INTO equipe (nome, qt_jogadores, categoria_id)
-VALUES ("Diamond", 5, 2),
+VALUES ("Sem Equipe", 0, 1) 
+       ("Diamond", 5, 2),
        ("Stars", 6, 2);
 
 -- ou
+
+INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
+VALUES ("", "Sem Equipe", "0", "1");
 
 INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
 VALUES ("", "Diamond", "5", "2");
