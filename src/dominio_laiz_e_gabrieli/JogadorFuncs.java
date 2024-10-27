@@ -64,6 +64,15 @@ public class JogadorFuncs implements JogadorInterface {
             stmt.setInt(5, jogador.getCategoria());
             stmt.setInt(6, jogador.getId());
             stmt.executeUpdate();
+    
+            if (jogador.getExperiencia() >= 5) {
+                delJogador(jogador.getId());
+                addJogador(new JogadorVeterano(jogador.getId(), jogador.getNome(), jogador.calcularSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
+            } else {
+                delJogador(jogador.getId());
+                addJogador(new JogadorTrainee(jogador.getId(), jogador.getNome(), jogador.calcularSalario(), jogador.getExperiencia(), jogador.getEquipe(), jogador.getCategoria()));
+            }
+    
             System.out.println("Jogador atualizado com sucesso!");
         } catch (SQLException ex) {
             System.out.println("Erro ao atualizar jogador: " + ex.getMessage());
