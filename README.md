@@ -77,14 +77,14 @@ INSERT INTO categoria (id, nome, descricao)
 VALUES ("2", "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
 
 INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
-VALUES ("", "Diamond", "5", "2");
+VALUES ("1", "Diamond", "5", "2");
 
 INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
-VALUES ("", "Stars", "6", "2");
+VALUES ("2", "Stars", "6", "2");
 
 INSERT INTO jogador(id, nome, salario, experiencia, equipe_id, categoria_id)
-VALUES ("", "Joao", "3500.00", "2", "1", "2");
+VALUES ("1", "Joao", "3500.00", "2", "1", "2");
 
 INSERT INTO jogador(id, nome, salario, experiencia, equipe_id, categoria_id)
-VALUES ("", "Lucas", "9500.00", "6", NULL, "1");
+VALUES ("2", "Lucas", "9500.00", "6", NULL, "1");
 ```
