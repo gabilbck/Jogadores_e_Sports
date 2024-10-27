@@ -46,7 +46,7 @@ VALUES ("2", "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
 criando duas equipes base/exemplo:
 */
 
-INSERT INTO equipe (nome, qt_jogadores, categoria_id)
+INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
 VALUES (1, "Sem Equipe", 0, 1) 
        (2, "Diamond", 5, 2),
        (3, "Stars", 6, 2);
