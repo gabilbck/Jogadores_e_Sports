@@ -47,7 +47,7 @@ criando duas equipes base/exemplo:
 */
 
 INSERT INTO equipe (id, nome, qt_jogadores, categoria_id)
-VALUES (1, "Sem Equipe", 0, 1) 
+VALUES (1, "Sem Equipe", 0, 1),
        (2, "Diamond", 5, 2),
        (3, "Stars", 6, 2);
 
