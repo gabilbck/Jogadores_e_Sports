@@ -13,11 +13,6 @@ exceção, além da implementação das classes utilizando padrões
 POO em Java e a classe Scanner
 </p>
 
-### Bnaco de Dados:
-
-<strong>Diagrama (Planejamento)</strong><br>
-![image](https://github.com/user-attachments/assets/b54acfd5-9323-40c0-b56b-237b9fc56e12)
-
 ### Comandos para criação/visualização do BDD:
 ```
 mysql -u root
