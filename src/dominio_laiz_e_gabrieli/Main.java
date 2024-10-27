@@ -66,13 +66,12 @@ public class Main {
 
                     case 3:
                         System.out.print("Digite o id do jogador para atualizar: ");
-                        id = scanner.nextInt();
+                        int id = scanner.nextInt();
                         scanner.nextLine(); 
-                        Jogador jogadorExistente = jogadorFuncs.searchJogador(id);
+                        Jogador jogadorExistente = jogadorFuncs.searchJogador(idAtualizar);
                         if (jogadorExistente != null) {
                             System.out.print("Digite o novo nome: ");
                             nome = scanner.nextLine();
-                            scanner.nextLine(); 
                             System.out.print("Digite o novo salário: ");
                             salario = scanner.nextDouble();
                             System.out.print("Digite os novos anos de treino: ");
@@ -89,11 +88,12 @@ public class Main {
                                 jogadorAtualizado = new JogadorTrainee(id, nome, salario, experiencia, equipeId, categoriaId);
                             }
                             jogadorFuncs.uptJogador(jogadorAtualizado);
+                            System.out.println("Jogador atualizado com sucesso.");
                         } else {
                             System.out.println("Jogador não encontrado.");
                         }
                         break;
-
+                        
                     case 4:
                         System.out.print("Digite o id do jogador para deletar: ");
                         id = scanner.nextInt();
