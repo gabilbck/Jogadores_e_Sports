@@ -38,14 +38,14 @@ public class Main {
                         System.out.print("Digite o salário: ");
                         double salario = scanner.nextDouble();
                         System.out.print("Digite os anos de treino: ");
-                        int anosTreino = scanner.nextInt();
+                        int experiencia = scanner.nextInt();
                         System.out.print("Digite o ID da equipe: ");
                         int equipeId = scanner.nextInt();
                         System.out.print("Digite a categoria (1 para solo e 2 para grupo): ");
                         int categoriaId = scanner.nextInt();
 
                         Jogador jogador;
-                        if (anosTreino >= 5) {
+                        if (experiencia >= 5) {
                             jogador = new JogadorVeterano(id, nome, salario, experiencia, equipeId, categoriaId);
                         } else {
                             jogador = new JogadorTrainee(id, nome, salario, experiencia, equipeId, categoriaId);
@@ -77,14 +77,14 @@ public class Main {
                             System.out.print("Digite o novo salário: ");
                             salario = scanner.nextDouble();
                             System.out.print("Digite os novos anos de treino: ");
-                            anosTreino = scanner.nextInt();
+                            experiencia = scanner.nextInt();
                             System.out.print("Digite o novo ID da equipe: ");
                             equipeId = scanner.nextInt();
                             System.out.print("Digite a nova categoria (1 para solo e 2 para grupo): ");
                             categoriaId = scanner.nextInt();
 
                             Jogador jogadorAtualizado;
-                            if (anosTreino >= 5) {
+                            if (experiencia >= 5) {
                                 jogadorAtualizado = new JogadorVeterano(id, nome, salario, experiencia, equipeId, categoriaId);
                             } else {
                                 jogadorAtualizado = new JogadorTrainee(id, nome, salario, experiencia, equipeId, categoriaId);
