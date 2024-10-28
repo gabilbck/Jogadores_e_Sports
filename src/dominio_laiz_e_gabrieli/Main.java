@@ -41,65 +41,117 @@ public class Main {
                 
                 int opcao = scanner.nextInt();
                 scanner.nextLine(); // para limpar o buffer do teclado... e não dar aqueles erros igual na aula do manfred
-                switch (opcao) {
-	                case 1:    
-	                    id = 0;
-	                    salarioTotalRecebido = 0;
-	                    System.out.print("Digite o nome: ");
-	                    nome = scanner.nextLine();
-	                    System.out.print("Digite o salário Bruto: ");
-	                    salarioBruto = scanner.nextDouble();
-	                    System.out.print("Digite os anos de treino: ");
-	                    experiencia = scanner.nextInt();
-	                    System.out.print("Digite a categoria (1 para solo e qualquer tecla para grupo): ");
-	                    categoriaId = scanner.nextInt();
-	                    
-	                    if (categoriaId == 1) {
-	                        equipeId = 1;
-	                    } else {
-	                    	List<Equipe> equipes = equipeFuncs.listEquipes();
-	                        System.out.println("Equipes disponíveis:");
-	                        for (Equipe eq : equipes) {
-	                            System.out.println("ID " + eq.getId() + " | Nome: " + eq.getNome());
-	                        }
-	                        
-	                        boolean equipeValida = false;
-	                        do {
-	                            System.out.print("Digite o ID da equipe: ");
-	                            equipeId = scanner.nextInt();
-	
-	                            // Verifica se o ID de equipe existe
-	                            for (Equipe eq : equipes) {
-	                                if (eq.getId() == equipeId) {
-	                                    equipeValida = true;
-	                                    break;
-	                                }
-	                            }
-	                            
-	                            if (!equipeValida) {
-	                                System.out.println("ID de equipe inválido. Por favor, escolha um ID válido.");
-	                            } else if (equipeId == 1) {
-	                                System.out.println("ID de equipe inválido. Equipe ID 1 é reservada para categoria solo.");
-	                                equipeValida = false;
-	                            }
-	                        } while (!equipeValida);
-	                    }
-	                    
-	                    Jogador jogador;
-	                    if (experiencia >= 5) {
-	                        jogador = new JogadorVeterano(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipeId, categoriaId);
-	                    } else {
-	                        jogador = new JogadorTrainee(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipeId, categoriaId);
-	                    }
-	                    
-	                    try {
-	                        jogadorFuncs.addJogador(jogador);
-	                        System.out.println("Jogador adicionado com sucesso.");
-	                    } catch (Exception e) {
-	                        System.out.println("Erro ao adicionar jogador: " + e.getMessage());
-	                        e.printStackTrace();
-	                    }
-	                    break;
+                switch (opcao) {   
+                case 1:
+                    id = 0;
+                    salarioTotalRecebido = 0;
+                    categoriaId = 0;
+                    equipeId = 0;
+
+                    System.out.print("Digite o nome: ");
+                    nome = scanner.nextLine();
+
+                    // Tratamento para salário bruto
+                    while (true) {
+                        try {
+                            System.out.print("Digite o salário Bruto: ");
+                            salarioBruto = scanner.nextDouble();
+                            if (salarioBruto < 0) {
+                                System.out.println("Erro: o salário bruto deve ser positivo.");
+                            } else {
+                                break;
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida. Por favor, digite um valor numérico para o salário.");
+                            scanner.nextLine(); // Limpa o buffer do scanner
+                        }
+                    }
+
+                    // Tratamento para anos de experiência
+                    while (true) {
+                        try {
+                            System.out.print("Digite os anos de treino: ");
+                            experiencia = scanner.nextInt();
+                            if (experiencia < 0) {
+                                System.out.println("Erro: a experiência deve ser um número positivo.");
+                            } else {
+                                break;
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida. Por favor, digite um número inteiro para os anos de treino.");
+                            scanner.nextLine(); // Limpa o buffer do scanner
+                        }
+                    }
+
+                    // Tratamento para categoria
+                    boolean categoriaValida = false;
+                    do {
+                        try {
+                            System.out.print("Digite a categoria (1 para solo e 2 para grupo): ");
+                            categoriaId = scanner.nextInt();
+                            if (categoriaId == 1 || categoriaId == 2) {
+                                categoriaValida = true;
+                            } else {
+                                System.out.println("ID de categoria inválido. Por favor, escolha 1 para solo ou 2 para grupo.");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida. Por favor, digite um número inteiro para a categoria.");
+                            scanner.nextLine(); // Limpa o buffer do scanner
+                        }
+                    } while (!categoriaValida);
+
+                    // Tratamento para equipe (apenas para categoria grupo)
+                    if (categoriaId == 2) {
+                        List<Equipe> equipes = equipeFuncs.listEquipes();
+                        System.out.println("Equipes disponíveis:");
+                        for (Equipe eq : equipes) {
+                            System.out.println("ID " + eq.getId() + " | Nome: " + eq.getNome());
+                        }
+
+                        boolean equipeValida = false;
+                        do {
+                            try {
+                                System.out.print("Digite o ID da equipe: ");
+                                equipeId = scanner.nextInt();
+                                
+                                for (Equipe eq : equipes) {
+                                    if (eq.getId() == equipeId) {
+                                        equipeValida = true;
+                                        break;
+                                    }
+                                }
+                                
+                                if (!equipeValida) {
+                                    System.out.println("ID de equipe inexistente. Por favor, escolha um ID válido.");
+                                } else if (equipeId == 1) {
+                                    System.out.println("ID de equipe inválido. Equipe ID 1 é reservada para categoria solo.");
+                                    equipeValida = false;
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("Entrada inválida. Por favor, digite um número inteiro para o ID da equipe.");
+                                scanner.nextLine(); // Limpa o buffer do scanner
+                            }
+                        } while (!equipeValida);
+                    } else {
+                        equipeId = 1; // ID para solo
+                    }
+
+                    Jogador jogador;
+                    if (experiencia >= 5) {
+                        jogador = new JogadorVeterano(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipeId, categoriaId);
+                    } else {
+                        jogador = new JogadorTrainee(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipeId, categoriaId);
+                    }
+
+                    try {
+                        jogadorFuncs.addJogador(jogador);
+                        System.out.println("Jogador adicionado com sucesso.");
+                    } catch (Exception e) {
+                        System.out.println("Erro ao adicionar jogador: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                    break;
+
 
 	                case 2:
 	                    try {
@@ -153,7 +205,7 @@ public class Main {
 	                            }
 	                            
 	                         // Salário Recebido
-	                            System.out.print("Digite o novo salário Bruto (ou pressione 'Enter' para manter o salário atual: " + jogadorExistente.getSalarioTotalRecebido() + "): ");
+	                            System.out.print("Digite o novo salário Recebido (ou pressione 'Enter' para manter o salário atual: " + jogadorExistente.getSalarioTotalRecebido() + "): ");
 	                            String salarioTotalRecebidoInput = scanner.nextLine();
 	                            if (salarioTotalRecebidoInput.isEmpty()) {
 	                                salarioTotalRecebido = jogadorExistente.getSalarioBruto();
@@ -161,7 +213,7 @@ public class Main {
 	                                try {
 	                                	salarioTotalRecebido = Double.parseDouble(salarioTotalRecebidoInput);
 	                                } catch (NumberFormatException e) {
-	                                    System.out.println("Entrada inválida para o salário bruto. Mantendo o salário atual: " + jogadorExistente.getSalarioBruto());
+	                                    System.out.println("Entrada inválida para o salário recebido. Mantendo o salário atual: " + jogadorExistente.getSalarioTotalRecebido());
 	                                    salarioTotalRecebido = jogadorExistente.getSalarioTotalRecebido();
 	                                }
 	                            }
