@@ -9,9 +9,21 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        Connection conn = null;
+    	/*
+    	 * Instancia o scanner e conexão
+    	 */
+        Scanner scanner = new Scanner(System.in); 
+        Connection conn = null; 
         try {
+        	/*
+        	 * Conecta com o banco de dados pelo objeto conn, 
+        	 * instancia as classes de funções
+        	 * funcinando = verdade
+        	 * apresenta menu de opcoes
+        	 * Define variaveis do objeto Jogador (o principal do CRUD)
+        	 * Solicita uma opção e limpa o buffer
+        	 * switch capta a opção, se n for nenhuma do menu, mostra msg de erro
+        	 */
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jogadores_e_sports", "root", "");
             JogadorFuncs jogadorFuncs = new JogadorFuncs(conn);
             CategoriaFuncs categoriaFuncs = new CategoriaFuncs(conn);
@@ -41,8 +53,15 @@ public class Main {
                 
                 int opcao = scanner.nextInt();
                 scanner.nextLine(); // para limpar o buffer do teclado... e não dar aqueles erros igual na aula do manfred
-                switch (opcao) {   
+                switch (opcao) {  
+                
+                /*
+                 * ADICIONARR NOVO JOGADOR
+                 */
                 case 1:
+                	/*
+                	 * Evitar que os atributos não possuam valor, por isso inciados em 0
+                	 */
                     id = 0;
                     salarioTotalRecebido = 0;
                     categoriaId = 0;
@@ -70,10 +89,10 @@ public class Main {
                     // Tratamento para anos de experiência
                     while (true) {
                         try {
-                            System.out.print("Digite os anos de treino: ");
+                            System.out.print("Digite os anos de experiência: ");
                             experiencia = scanner.nextInt();
                             if (experiencia < 0) {
-                                System.out.println("Erro: a experiência deve ser um número positivo.");
+                                System.out.println("Erro: a experiência deve ser um valor positivo.");
                             } else {
                                 break;
                             }
@@ -84,7 +103,7 @@ public class Main {
                     }
 
                     // Tratamento para categoria
-                    boolean categoriaValida = false;
+                    boolean categoriaValida = false; //Inicia como false para validar no if, após entrada do usuário
                     do {
                         try {
                             System.out.print("Digite a categoria (1 para solo e 2 para grupo): ");
@@ -136,6 +155,7 @@ public class Main {
                         equipeId = 1; // ID para solo
                     }
 
+                    //Instancia o jogador dependendo de sua classificação (veterano ou trainee)
                     Jogador jogador;
                     if (experiencia >= 5) {
                         jogador = new JogadorVeterano(id, nome, salarioBruto, salarioTotalRecebido, experiencia, equipeId, categoriaId);
@@ -152,7 +172,9 @@ public class Main {
                     }
                     break;
 
-
+                    /*
+                     * BUSCAR JOGADOR POR ID
+                     */
 	                case 2:
 	                    try {
 	                        System.out.print("Digite o id do jogador: ");
@@ -171,7 +193,13 @@ public class Main {
 	                        scanner.nextLine(); // Limpa o buffer do scanner para evitar erros em futuras leituras
 	                    }
 	                    break;
-
+	                    
+	                    
+	                /*
+	                 * ATUALIZAR REGISTRO DE JOGADOR
+	                 * (As entradas, por padrão, estão como "strings" para poder tratar os diferentes erros e permitir que o usuário deixe vazio
+	                 *         (para o caso de não querer mudar atributo especifico)
+	                 */
 	                case 3:
 	                    System.out.println("(Para verificar id, selecione 'listar jogadores')");
 	                    try {
@@ -227,7 +255,7 @@ public class Main {
 	                                try {
 	                                    experiencia = Integer.parseInt(experienciaInput);
 	                                    if (experiencia < jogadorExistente.getExperiencia()) {
-	                                        System.out.println("Anos de treino não podem ser diminuídos. Mantendo o valor atual: " + jogadorExistente.getExperiencia());
+	                                        System.out.println("Experiencia não podem ser diminuídos. Mantendo o valor atual: " + jogadorExistente.getExperiencia());
 	                                        experiencia = jogadorExistente.getExperiencia();
 	                                    }
 	                                } catch (NumberFormatException e) {
@@ -293,6 +321,9 @@ public class Main {
 	                    }
 	                    break;
  
+	                /*
+	                 * DELETAR JOGADOR
+	                 */
 	                case 4:
 	                    try {
 	                        List<Jogador> jogadores = jogadorFuncs.listJogadores();
@@ -324,6 +355,9 @@ public class Main {
 	                    }
 	                    break;
 
+	                /*
+	                 * LISTAR JOGADORES
+	                 */
 	                case 5:
 	                    try {
 	                        List<Jogador> jogadores = jogadorFuncs.listJogadores();
@@ -340,6 +374,9 @@ public class Main {
 	                    }
 	                    break;
 
+	                /*
+	                 * LISTAR CATEGORIAS
+	                 */
 	                case 6:
 	                    try {
 	                        List<Categoria> categorias = categoriaFuncs.listCategorias();
@@ -356,6 +393,9 @@ public class Main {
 	                    }
 	                    break;
 
+	                /*
+	                 * LISTAE EQUIPES
+	                 */
 	                case 7:
 	                    try {
 	                        List<Equipe> equipes = equipeFuncs.listEquipes();
@@ -372,6 +412,9 @@ public class Main {
 	                    }
 	                    break;
                         
+	                /*
+	                 * RECEBER SALÁRIO
+	                 */
 	                case 8:
 	                	List<Jogador> jogadores = jogadorFuncs.listJogadores();
                         if (jogadores.isEmpty()) {
@@ -401,16 +444,25 @@ public class Main {
                         }
 	                    break;
 	                	
+	                /*
+	                 * SAIR
+	                 */
                     case 9:
                         running = false;
                         break;
 
+                    /*
+                     * OPÇÃO INVÁLIDA
+                     */
                     default:
                         System.out.println("Opção inválida. Tente novamente.");
                         break;
                 }
             }
 
+        /*
+         * Erros de conexão com o banco de dados
+         */
         } catch (SQLException e) {
             System.out.println("Erro na conexão com o banco de dados: " + e.getMessage());
             e.printStackTrace();
