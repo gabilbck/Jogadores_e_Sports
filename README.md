@@ -70,23 +70,16 @@ desc equipe;
 ### Registros de Teste:
 ```
 INSERT INTO categoria (id, nome, descricao)
-VALUES ("1", "Solo", "Nesta categoria os jogadores jogam de forma individual. Times sao proibidos.");
-
-INSERT INTO categoria (id, nome, descricao)
-VALUES ("2", "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
+VALUES (1, "Solo", "Nesta categoria os jogadores jogam de forma individual. Times são proibidos."),
+       (2, "Grupo", "Nesta categoria os jogadores jogam acompanhados.");
 
 INSERT INTO equipe (id, nome, categoria_id)
-VALUES ("1", "Sem equipe", "1");
-
-INSERT INTO equipe (id, nome, categoria_id)
-VALUES ("2", "Diamond", "2");
-
-INSERT INTO equipe (id, nome, categoria_id)
-VALUES ("3", "Stars", "2");
+VALUES (1, "Sem Equipe", 1),
+       (2, "Diamond", 2),
+       (3, "Stars", 2);
 
 INSERT INTO jogador(id, nome, salario_bruto, salario_total_recebido, experiencia, equipe_id, categoria_id)
-VALUES ("1", "Joao", "3500.00", "0", "2", "2", "2");
-
-INSERT INTO jogador(id, nome, salario_bruto, salario_total_recebido, experiencia, equipe_id, categoria_id)
-VALUES ("2", "Lucas", "9500.00", "0", "6", 1, "1");
+VALUES (1, "Joao", 3550.00, 0, 2, 2, 2),
+       (2, "Maria", 9500.00, 0, 6, 1, 1),
+       (3, "Lucas", 4070.00, 0, 4, 3, 2);
 ```
