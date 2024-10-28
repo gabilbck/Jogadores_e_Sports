@@ -1,6 +1,6 @@
 ## Por cima: 
 
-**Main** -> classe executora, onde o usuário pode acessar as funções do CRUD de jogadores, categorias e equipes
+**Main** -> classe executora, onde o usuário pode acessa as funcionalidades do CRUD de jogadores, categorias e equipes
 - Jogadores
   - Adicionar, Atualizar, Deletar, Procurar, Listar, Salário
 - Categorias
